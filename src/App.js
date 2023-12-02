@@ -9,61 +9,49 @@ import {
   useParams,
   useNavigate,
 } from "react-router-dom";
+import Weather from "./pages/weather/Weather";
+import Contact from "./pages/contact/Contact";
+import About from "./pages/about/About";
+import CounterTest from "./pages/counter/CounterTest";
+import CounterDisplayV2 from "./pages/counterDisplayV2/CounterDisplayV2";
 
 function App() {
-  // return (
-  //   <div className="App">
-  //     <header className="App-header">
-  //       <img src={logo} className="App-logo" alt="logo" />
-  //       <p>
-  //         Edit <code>src/App.js</code> and save to reload.
-  //       </p>
-  //       <a
-  //         className="App-link"
-  //         href="https://reactjs.org"
-  //         target="_blank"
-  //         rel="noopener noreferrer"
-  //       >
-  //         Learn React
-  //       </a>
-  //     </header>
-  //   </div>
-  // );
-
   const name = "Abing";
 
   return (
-    <BrowserRouter>
-      <main >
-        <nav style={headerStyle} >
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to={`/about/${name}`}>About</Link>
-            </li>
-            <li>
-              <Link to="/contact">Contact</Link>
-            </li>
-            <li>
-              <Link to="/render">Render</Link>
-            </li>
-            <li>
-              <Link to="/counter">Counter</Link>
-            </li>
-          </ul>
-        </nav>
-        <Routes>
-          <Route path="/" exact element={<Home />} />
-          <Route path="/about/:name" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/render" element={<h1>Render</h1>} />
-          <Route path="/counter" element={<Counter />} />
-          <Route path="/display-count/:count" element={<DisplayCount />}/>
-        </Routes>
-      </main>
-    </BrowserRouter>
+    <main>
+      <nav style={headerStyle}>
+        <ul>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to={`/about/${name}`}>About</Link>
+          </li>
+          <li>
+            <Link to="/contact">Contact</Link>
+          </li>
+          <li>
+            <Link to="/counter-test">Counter Test</Link>
+          </li>
+          <li>
+            <Link to="/weather">Weather</Link>
+          </li>
+        </ul>
+      </nav>
+      <Routes>
+        <Route path="/" exact element={<Home />} />
+        <Route path="/about/:name" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/counter-test" element={<CounterTest />} />
+        <Route path="/display-count/:count" element={<DisplayCount />} />
+        <Route
+          path="/counter-test/counter-display-v2/:counterValue"
+          element={<CounterDisplayV2 />}
+        />
+        <Route path="/weather" element={<Weather />} />
+      </Routes>
+    </main>
   );
 }
 
@@ -71,26 +59,6 @@ function App() {
 const Home = () => (
   <Fragment>
     <h1>Home</h1>
-    <FakeText />
-  </Fragment>
-);
-
-//about page
-const About = () => {
-  const { name } = useParams();
-  return (
-    <Fragment>
-      <h1>About</h1>
-      <h2>The name is {name}</h2>
-      <FakeText />
-    </Fragment>
-  );
-};
-
-//contact page
-const Contact = () => (
-  <Fragment>
-    <h1>Contact</h1>
     <FakeText />
   </Fragment>
 );
@@ -107,19 +75,20 @@ const Counter = () => {
 };
 
 const DisplayCount = () => {
-  const { count } = useParams()
+  const { count } = useParams();
+  console.log(`Count is ${count}`);
   return (
     <div>
       <h1>Display Count</h1>
       <h2>The count received is : {count} </h2>
     </div>
-  )
-}
+  );
+};
 
 function CounterButton() {
   const [count, setCounter] = useState(0);
   const [hoveredButton, setHoveredButton] = useState(null);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const increment = () => setCounter(count + 1);
 
@@ -143,8 +112,8 @@ function CounterButton() {
   };
 
   const submitCount = () => {
-    navigate(`/display-count/${count}`)
-  }
+    navigate(`/display-count/${count}`);
+  };
 
   return (
     <div>
@@ -189,7 +158,7 @@ function CounterButton() {
           </button>
         </div>
         <div className={counterStyle.buttonCentered}>
-          <div style={counterStyle.contentCentered} >
+          <div style={counterStyle.contentCentered}>
             <button
               style={
                 hoveredButton === 4
@@ -248,15 +217,15 @@ const counterStyle = {
     alignItems: "center",
   },
   contentCentered: {
-    textAlign: 'center', 
-  }
+    textAlign: "center",
+  },
 };
 
 const headerStyle = {
-  backgroundColor: "#26BA2D", 
-  color: 'white',
-  padding: '15px 20px'
-}
+  backgroundColor: "#26BA2D",
+  color: "white",
+  padding: "15px 20px",
+};
 
 const FakeText = () => (
   <Fragment>
