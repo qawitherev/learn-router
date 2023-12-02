@@ -1,7 +1,14 @@
 // import logo from './logo.svg';
 import "./App.css";
 import { Fragment, useState } from "react";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Link,
+  useParams,
+  useNavigate,
+} from "react-router-dom";
 
 function App() {
   // return (
@@ -23,16 +30,18 @@ function App() {
   //   </div>
   // );
 
+  const name = "Abing";
+
   return (
     <BrowserRouter>
-      <main>
-        <nav>
+      <main >
+        <nav style={headerStyle} >
           <ul>
             <li>
               <Link to="/">Home</Link>
             </li>
             <li>
-              <Link to="/about">About</Link>
+              <Link to={`/about/${name}`}>About</Link>
             </li>
             <li>
               <Link to="/contact">Contact</Link>
@@ -47,10 +56,11 @@ function App() {
         </nav>
         <Routes>
           <Route path="/" exact element={<Home />} />
-          <Route path="/about" element={<About />} />
+          <Route path="/about/:name" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/render" element={<h1>Render</h1>} />
           <Route path="/counter" element={<Counter />} />
+          <Route path="/display-count/:count" element={<DisplayCount />}/>
         </Routes>
       </main>
     </BrowserRouter>
@@ -66,12 +76,16 @@ const Home = () => (
 );
 
 //about page
-const About = () => (
-  <Fragment>
-    <h1>About</h1>
-    <FakeText />
-  </Fragment>
-);
+const About = () => {
+  const { name } = useParams();
+  return (
+    <Fragment>
+      <h1>About</h1>
+      <h2>The name is {name}</h2>
+      <FakeText />
+    </Fragment>
+  );
+};
 
 //contact page
 const Contact = () => (
@@ -92,9 +106,20 @@ const Counter = () => {
   );
 };
 
+const DisplayCount = () => {
+  const { count } = useParams()
+  return (
+    <div>
+      <h1>Display Count</h1>
+      <h2>The count received is : {count} </h2>
+    </div>
+  )
+}
+
 function CounterButton() {
   const [count, setCounter] = useState(0);
   const [hoveredButton, setHoveredButton] = useState(null);
+  const navigate = useNavigate()
 
   const increment = () => setCounter(count + 1);
 
@@ -117,45 +142,69 @@ function CounterButton() {
     setHoveredButton(null);
   };
 
+  const submitCount = () => {
+    navigate(`/display-count/${count}`)
+  }
+
   return (
     <div>
       <p>Counter value: {count}</p>
-      <button
-        style={
-          hoveredButton === 1
-            ? { ...counterStyle.buttonStyle, backgroundColor: "#45a049" }
-            : counterStyle.buttonStyle
-        }
-        onClick={increment}
-        onMouseEnter={() => handleMouseEnter(1)}
-        onMouseLeave={() => handleMouseLeave()}
-      >
-        Increase Counter
-      </button>
-      <button
-        style={
-          hoveredButton === 2
-            ? { ...counterStyle.buttonStyle, backgroundColor: "#45a049" }
-            : counterStyle.buttonStyle
-        }
-        onClick={decrement}
-        onMouseEnter={() => handleMouseEnter(2)}
-        onMouseLeave={() => handleMouseLeave()}
-      >
-        Decrease Counter
-      </button>
-      <button
-        style={
-          hoveredButton === 3
-            ? { ...counterStyle.buttonStyle, backgroundColor: "#45a049" }
-            : counterStyle.buttonStyle
-        }
-        onClick={reset}
-        onMouseEnter={() => handleMouseEnter(3)}
-        onMouseLeave={() => handleMouseLeave()}
-      >
-        Reset Counter
-      </button>
+      <div className={counterStyle.buttonContainer}>
+        <div className={counterStyle.buttonRow}>
+          <button
+            style={
+              hoveredButton === 1
+                ? { ...counterStyle.buttonStyle, backgroundColor: "#45a049" }
+                : counterStyle.buttonStyle
+            }
+            onClick={increment}
+            onMouseEnter={() => handleMouseEnter(1)}
+            onMouseLeave={() => handleMouseLeave()}
+          >
+            Increase Counter
+          </button>
+          <button
+            style={
+              hoveredButton === 2
+                ? { ...counterStyle.buttonStyle, backgroundColor: "#45a049" }
+                : counterStyle.buttonStyle
+            }
+            onClick={decrement}
+            onMouseEnter={() => handleMouseEnter(2)}
+            onMouseLeave={() => handleMouseLeave()}
+          >
+            Decrease Counter
+          </button>
+          <button
+            style={
+              hoveredButton === 3
+                ? { ...counterStyle.buttonStyle, backgroundColor: "#45a049" }
+                : counterStyle.buttonStyle
+            }
+            onClick={reset}
+            onMouseEnter={() => handleMouseEnter(3)}
+            onMouseLeave={() => handleMouseLeave()}
+          >
+            Reset Counter
+          </button>
+        </div>
+        <div className={counterStyle.buttonCentered}>
+          <div style={counterStyle.contentCentered} >
+            <button
+              style={
+                hoveredButton === 4
+                  ? { ...counterStyle.buttonStyle, backgroundColor: "#45a049" }
+                  : counterStyle.buttonStyle
+              }
+              onClick={() => submitCount()}
+              onMouseEnter={() => handleMouseEnter(4)}
+              onMouseLeave={() => handleMouseLeave()}
+            >
+              Submit Count
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
@@ -185,7 +234,29 @@ const counterStyle = {
     fontSize: "16px",
     cursor: "pointer",
   },
+  buttonContainer: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+  buttonRow: {
+    display: "flex",
+  },
+  buttonCentered: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  contentCentered: {
+    textAlign: 'center', 
+  }
 };
+
+const headerStyle = {
+  backgroundColor: "#26BA2D", 
+  color: 'white',
+  padding: '15px 20px'
+}
 
 const FakeText = () => (
   <Fragment>
