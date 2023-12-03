@@ -1,18 +1,47 @@
 class WeatherModel {
-    constructor(main, description, temp, feelsLike, tempMin, tempMax, sunrise, sunset, city) {
-        this.main = main; 
-        this.description = description;  
-        this.temp = temp; 
-        this.feelsLike = feelsLike; 
-        this.tempMin = tempMin; 
-        this.tempMax = tempMax; 
-        this.sunrise = sunrise; 
-        this.sunset = sunset; 
-        this.city = city; 
-      }
+  constructor(
+    main,
+    description,
+    temp,
+    feelsLike,
+    tempMin,
+    tempMax,
+    sunrise,
+    sunset,
+    city
+  ) {
+    this.main = main;
+    this.description = description;
+    this.temp = temp;
+    this.feelsLike = feelsLike;
+    this.tempMin = tempMin;
+    this.tempMax = tempMax;
+    this._sunrise = sunrise;
+    this._sunset = sunset;
+    this.city = city;
+  }
+
+  get sunrise() {
+    return this.convertUnixToReadable(this._sunrise); 
+  }
+
+  get sunset() {
+    return this.convertUnixToReadable(this._sunset); 
+  }
+
+  convertUnixToReadable(unixTimeStamp) {
+    const date = new Date(unixTimeStamp*1000);
+    const readable = date.toLocaleTimeString('en-us', {
+        hour: 'numeric', 
+        minute: '2-digit', 
+        hour12: true
+    });
+
+    return readable; 
+  }
 }
 
-export default WeatherModel; 
+export default WeatherModel;
 
 /*
 JSON sample is 

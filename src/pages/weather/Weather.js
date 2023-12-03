@@ -7,6 +7,7 @@ function Weather() {
   const { API_KEY, PREFIX } = WeatherApi;
   const lat = 4.75;
   const long = 115.0;
+  const [inputtedLocation, setInputtedLocation] = useState('');
 
   useEffect(() => {
     // console.log(`API_KEY is ${API_KEY}, prefix is ${PREFIX}`)
@@ -51,13 +52,46 @@ function Weather() {
     ); 
   }
 
+  const SearchLocation = () => {
+
+    return (
+        <div>
+            <h2>Enter your location</h2>
+            <input type='text' value={inputtedLocation}  />
+            <button>Find out Weather</button>
+        </div>
+    ); 
+  }
+
   return (
     <div>
       <h1>Weather</h1>
       <h2>City: {weather && weather.city}</h2>
       {weather ? <WeatherDisplay /> : <p>Weather data is loading...</p>}
+      <div>
+        <SearchLocation />
+      </div>
     </div>
   );
 }
 
 export default Weather;
+
+
+/*
+flow 
+1. user enter location inside textbox 
+2. click search
+3. display weatherData
+
+flow technical 
+1. get inputted location 
+2. get location 
+    if has space, add hypen in between (format)
+3. make url, combine prefix with formatted location
+4. get jsonData, check if location is 'MY'
+5. get the lat, long
+6. get the weather data 
+7. END 
+
+*/
