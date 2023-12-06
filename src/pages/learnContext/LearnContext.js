@@ -101,7 +101,7 @@ function SearchWeather() {
         //case location not found, case location found, show weather 
         <>
             { state === 2 ? <p>Location not found</p> : null}
-            { lat === -1 && lon === -1 ? null : <p>This is weather for {weather.city}</p>}
+            { lat != -1 && lon != -1 && state === 1 ? <p>This is weather for {weather.city} </p> : null }
         </>
     )
 }
