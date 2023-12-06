@@ -14,6 +14,8 @@ import Contact from "./pages/contact/Contact";
 import About from "./pages/about/About";
 import CounterTest from "./pages/counter/CounterTest";
 import CounterDisplayV2 from "./pages/counterDisplayV2/CounterDisplayV2";
+import LearnComponent from "./pages/learnComponent/LearnComponent";
+import { MyWeather } from "./pages/learnContext/LearnContext";
 
 function App() {
   const name = "Abing";
@@ -37,6 +39,12 @@ function App() {
           <li>
             <Link to="/weather">Weather</Link>
           </li>
+          <li>
+            <Link to="/learn-component">Learn Component</Link>
+          </li>
+          <li>
+            <Link to="/learn-context" >Learn Context</Link>
+          </li>
         </ul>
       </nav>
       <Routes>
@@ -50,6 +58,8 @@ function App() {
           element={<CounterDisplayV2 />}
         />
         <Route path="/weather" element={<Weather />} />
+        <Route path="/learn-component" element={<LearnComponent />} />
+        <Route path="/learn-context" element={<MyWeather />} />
       </Routes>
     </main>
   );

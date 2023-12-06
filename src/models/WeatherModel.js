@@ -21,23 +21,38 @@ class WeatherModel {
     this.city = city;
   }
 
+  //factory
+  static fromJson(json) {
+    return new WeatherModel(
+      json.weather[0].main,
+      json.weather[0].description,
+      json.main.temp,
+      json.main.feels_like,
+      json.main.temp_min,
+      json.main.temp_max,
+      json.sys.sunrise,
+      json.sys.sunset,
+      json.name
+    );
+  }
+
   get sunrise() {
-    return this.convertUnixToReadable(this._sunrise); 
+    return this.convertUnixToReadable(this._sunrise);
   }
 
   get sunset() {
-    return this.convertUnixToReadable(this._sunset); 
+    return this.convertUnixToReadable(this._sunset);
   }
 
   convertUnixToReadable(unixTimeStamp) {
-    const date = new Date(unixTimeStamp*1000);
-    const readable = date.toLocaleTimeString('en-us', {
-        hour: 'numeric', 
-        minute: '2-digit', 
-        hour12: true
+    const date = new Date(unixTimeStamp * 1000);
+    const readable = date.toLocaleTimeString("en-us", {
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: true,
     });
 
-    return readable; 
+    return readable;
   }
 }
 
