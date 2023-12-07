@@ -6,6 +6,7 @@ import WeatherModel from '../../models/WeatherModel';
 const WeatherContext = createContext()
 const  { API_KEY, WEATHER_PREFIX, GEOCODE_PREFIX } = WeatherApi
 
+//TODO: when no 'MY' country is found, show location not found   
 
 const WeatherProvider = ({ children }) => {
     const [weather, setWeather] = useState(null)
