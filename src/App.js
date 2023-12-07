@@ -73,7 +73,7 @@ function App() {
 //home page
 const Home = () => (
   <Fragment>
-    <h1>Home</h1>
+    <h1>Home. This means that the http issue already been pushed</h1>
     <FakeText />
   </Fragment>
 );
