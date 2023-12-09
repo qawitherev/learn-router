@@ -1,14 +1,37 @@
-import React from "react";
+import React, { useRef, useState } from "react";
+import { motion } from "framer-motion";
 
 export function LearnTailWind() {
+  const componentRefs = [
+    useRef(null),
+    useRef(null),
+    useRef(null),
+    useRef(null),
+    useRef(null),
+    useRef(null),
+    useRef(null),
+  ];
+
+  const scrollToComponent = (index) => {
+    if (componentRefs[index].current) {
+      window.scrollTo({
+        top: componentRefs[index].current.offsetTop,
+        behavior: "smooth",
+      });
+    }
+  };
+
   return (
     <>
       <h1>Using Grid</h1>
-      <div className="grid auto-rows-[200px] sm:grid-cols-1 md:grid-cols-6 gap-4 p-20 md:p-10">
-        {[...Array(7)].map((_, i) => (
-          <div
-            key={i}
-            className={`rounded-xl border-2 border-slate-400 bg-neutral-100 dark:bg-neutral-400
+      <div className="bg-gray-100">
+        <div className="grid auto-rows-[200px] sm:grid-cols-1 md:grid-cols-6 gap-3 p-5">
+          {[...Array(7)].map((_, i) => (
+            <div
+              key={i}
+              ref={componentRefs[i]}
+              onClick={() => scrollToComponent(i)}
+              className={`rounded-xl bg-white
             ${i === 0 ? "md:col-span-3 md:row-span-1" : ""}
           ${i === 1 ? "md:col-span-1 md:row-span-1" : ""}
           ${[2, 5].includes(i) ? "md:col-span-2 md:row-span-2" : ""}
@@ -17,10 +40,32 @@ export function LearnTailWind() {
           ${i === 6 ? "md:col-span-4 md:row-span-1" : ""}
           transform transition-transform hover:scale-95
           `}
-          >
-            <SubBento data={i} />
-          </div>
-        ))}
+            >
+              <SubBento data={i} />
+            </div>
+          ))}
+        </div>
+        <div ref={componentRefs[0]}>
+          <CompanyWork />
+        </div>
+        <div ref={componentRefs[1]}>
+          <ProjectNumber />
+        </div>
+        <div ref={componentRefs[2]}>
+          <MobileStack />
+        </div>
+        <div ref={componentRefs[3]}>
+          <SocialSite />
+        </div>
+        <div ref={componentRefs[4]}>
+          <CatchPhrase />
+        </div>
+        <div ref={componentRefs[5]}>
+          <WebStack />
+        </div>
+        <div ref={componentRefs[6]}>
+          <OutsideSkill />
+        </div>
       </div>
     </>
   );
@@ -32,63 +77,208 @@ function SubBento(props) {
     case 0:
       return (
         <>
-          <SubBento0 />
+          <CompanyWorkSubBento />
         </>
       );
     case 1:
       return (
         <>
-          <h1>{props.data}</h1>
+          <ProjectNumberSubBento />
         </>
       );
     case 2:
       return (
         <>
-          <h1>{props.data}</h1>
+          <MobileStackSubBento />
         </>
       );
     case 3:
       return (
         <>
-          <h1>{props.data}</h1>
+          <SocialSiteSubBento />
         </>
       );
     case 4:
       return (
         <>
-          <h1>{props.data}</h1>
+          <CatchPhraseSubBento />
         </>
       );
     case 5:
       return (
         <>
-          <h1>{props.data}</h1>
+          <WebStackSubBento />
         </>
       );
     case 6:
       return (
         <>
-          <h1>{props.data}</h1>
+          <OutsideSkillSubBento />
         </>
       );
   }
 }
 
-function SubBento0() {
+function CompanyWorkSubBento() {
   return (
     <>
-      <div>
-        <h1>This is SubBento0</h1>
+      <div className="flex items-center justify-center h-full">
+        <h1>This is the company that i worked for</h1>
       </div>
     </>
   );
 }
 
-/**
- * steps to make bentobox grid using grid
- * 1. make a div, specify row height, specify number of col and gap
- * 2. row will follow the number of items (dynamic)
- * 3. make array with length of your bentobox grid
- * 4. map each element into a div
- * 5.
- */
+function ProjectNumberSubBento() {
+  return (
+    <>
+      <div className="flex items-center justify-center h-full">
+        <h1>200++</h1>
+      </div>
+    </>
+  );
+}
+
+function MobileStackSubBento() {
+  return (
+    <>
+      <div className="flex items-center justify-center h-full">
+        <h1>Mobile stack is: ...</h1>
+      </div>
+    </>
+  );
+}
+
+function SocialSiteSubBento() {
+  return (
+    <>
+      <div className="flex items-center justify-center h-full">
+        <h1>Lets get in touch!</h1>
+      </div>
+    </>
+  );
+}
+
+function CatchPhraseSubBento() {
+  return (
+    <>
+      <div className="flex items-center justify-center h-full">
+        <h1>THE BEST SOFTWARE ENGINEER</h1>
+      </div>
+    </>
+  );
+}
+
+function WebStackSubBento() {
+  return (
+    <>
+      <div className="flex items-center justify-center h-full">
+        <h1>Web stack is...</h1>
+      </div>
+    </>
+  );
+}
+
+function OutsideSkillSubBento() {
+  return (
+    <>
+      <div className="flex items-center justify-center h-full">
+        <h1>I am also good with ...</h1>
+      </div>
+    </>
+  );
+}
+
+function CompanyWork() {
+  const Airdroitech = () => {
+    return (
+      <>
+        <img
+          className="w-1/2"
+          src="https://airdroitech.com/wp-content/uploads/2021/03/AirdroiTech-Logo-header-400x96.png"
+        />
+        <h1 className="py-2" >Mar 2023 - Nov 2023</h1>
+      </>
+    );
+  };
+
+  const Fpt = () => {
+    return (
+      <>
+        <img
+          className="w-1/2"
+          src="https://fptsoftware.com/-/media/project/fpt-software/fso/systems/logo/logo.svg?as=1&iar=0&extension=webp&modified=20230519141554&hash=A28FD0836414E4F10707ECCC57D396B2"
+        />
+        <h1 className="py-2" >Jan 2024 - Current</h1>
+      </>
+    );
+  };
+
+  return (
+    <>
+      <div>
+        <h1 className="text-adt-green px-7 pb-3 text-3xl font-bold font-sans">
+          Companies I proudly serve for
+        </h1>
+        <div className="grid auto-rows-min-[150px] sm:grid-cols-1 md:grid-cols-2 gap-3 px-5">
+          {[...Array(2)].map((_, i) => (
+            <div
+              key={i}
+              className="rounded-xl bg-white col-span-1 row-span-1 flex flex-col items-center justify-center h-full p-5"
+            >
+              {i === 0 ? <Airdroitech /> : <Fpt />}
+            </div>
+          ))}
+        </div>
+      </div>
+    </>
+  );
+}
+
+function ProjectNumber() {
+  return (
+    <>
+      <h1>Project number is: ...</h1>
+    </>
+  );
+}
+
+function MobileStack() {
+  return (
+    <>
+      <h1>Mobile Stack is: ...</h1>
+    </>
+  );
+}
+
+function SocialSite() {
+  return (
+    <>
+      <h1>Social site is: ...</h1>
+    </>
+  );
+}
+
+function CatchPhrase() {
+  return (
+    <>
+      <h1>Catchphrase is: ...</h1>
+    </>
+  );
+}
+
+function WebStack() {
+  return (
+    <>
+      <h1>Webstack is: ...</h1>
+    </>
+  );
+}
+
+function OutsideSkill() {
+  return (
+    <>
+      <h1>Outside skill is: ...</h1>
+    </>
+  );
+}
