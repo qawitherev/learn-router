@@ -1,5 +1,4 @@
-import React, { useRef, useState } from "react";
-import { motion } from "framer-motion";
+import React, { useRef } from "react";
 
 export function LearnTailWind() {
   const componentRefs = [
@@ -25,7 +24,7 @@ export function LearnTailWind() {
     <>
       <h1>Using Grid</h1>
       <div className="bg-gray-100">
-        <div className="grid auto-rows-[200px] sm:grid-cols-1 md:grid-cols-6 gap-3 p-5">
+        <div className="grid auto-rows sm:grid-cols-1 md:grid-cols-6 gap-3 p-5">
           {[...Array(7)].map((_, i) => (
             <div
               key={i}
@@ -116,6 +115,8 @@ function SubBento(props) {
           <OutsideSkillSubBento />
         </>
       );
+    default:
+      return null;
   }
 }
 
@@ -142,8 +143,47 @@ function ProjectNumberSubBento() {
 function MobileStackSubBento() {
   return (
     <>
-      <div className="flex items-center justify-center h-full">
-        <h1>Mobile stack is: ...</h1>
+      <div className="flex flex-col items-center justify-center p-10 h-full gap-1 ">
+        <h1>Mobile Development</h1>
+        <div className="flex justify-between gap-1">
+          <div>
+            <img
+              className=" aspect-square rounded-lg"
+              alt="kotlin-logo"
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Kotlin_Icon.png/1200px-Kotlin_Icon.png"
+            />
+          </div>
+          <div>
+            <img
+              className=" aspect-square rounded-lg"
+              alt="kotlin-logo"
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Kotlin_Icon.png/1200px-Kotlin_Icon.png"
+            />
+          </div>
+          <div>
+            <img
+              className=" aspect-square rounded-lg"
+              alt="kotlin-logo"
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Kotlin_Icon.png/1200px-Kotlin_Icon.png"
+            />
+          </div>
+        </div>
+        <div className=" flex justify-between gap-1" >
+        <div>
+            <img
+              className=" aspect-square rounded-lg"
+              alt="kotlin-logo"
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Kotlin_Icon.png/1200px-Kotlin_Icon.png"
+            />
+          </div>
+          <div>
+            <img
+              className=" aspect-square rounded-lg"
+              alt="kotlin-logo"
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Kotlin_Icon.png/1200px-Kotlin_Icon.png"
+            />
+          </div>
+        </div>
       </div>
     </>
   );
@@ -196,8 +236,9 @@ function CompanyWork() {
         <img
           className="w-1/2"
           src="https://airdroitech.com/wp-content/uploads/2021/03/AirdroiTech-Logo-header-400x96.png"
+          alt="adt-logo"
         />
-        <h1 className="py-2" >Mar 2023 - Nov 2023</h1>
+        <h1 className="py-2">Mar 2023 - Nov 2023</h1>
       </>
     );
   };
@@ -208,8 +249,9 @@ function CompanyWork() {
         <img
           className="w-1/2"
           src="https://fptsoftware.com/-/media/project/fpt-software/fso/systems/logo/logo.svg?as=1&iar=0&extension=webp&modified=20230519141554&hash=A28FD0836414E4F10707ECCC57D396B2"
+          alt="fpt-logo"
         />
-        <h1 className="py-2" >Jan 2024 - Current</h1>
+        <h1 className="py-2">Jan 2024 - Current</h1>
       </>
     );
   };
