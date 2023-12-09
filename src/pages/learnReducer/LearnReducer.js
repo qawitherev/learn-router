@@ -157,8 +157,8 @@ const SearchLocation = () => {
   return (
     <>
       <h3>Enter your location</h3>
-      <input type="text" value={inputValue} onChange={handleOnChange} />
-      <button onClick={handleOnClick}>Get Weather</button>
+      <input class="border rounded bg-white text-black p-2 focus:outline-none focus:ring focus:border-blue-500" type="text" value={inputValue} onChange={handleOnChange} />
+      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={handleOnClick}>Get Weather</button>
       {state.latLon && <p>location latlon is {state.latLon.lat}, {state.latLon.lon}</p>}
     </>
   );

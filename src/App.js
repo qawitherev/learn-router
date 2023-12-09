@@ -17,6 +17,7 @@ import CounterDisplayV2 from "./pages/counterDisplayV2/CounterDisplayV2";
 import LearnComponent from "./pages/learnComponent/LearnComponent";
 import { MyWeather } from "./pages/learnContext/LearnContext";
 import { LearnReducer } from "./pages/learnReducer/LearnReducer";
+import { LearnTailWind } from "./pages/learnTailwind/LearnTailwind";
 
 function App() {
   const name = "Abing";
@@ -49,6 +50,9 @@ function App() {
           <li>
             <Link to="/learn-reducer" >Learn Reducer</Link>
           </li>
+          <li>
+            <Link to="/learn-tailwind" >Learn Tailwind</Link>
+          </li>
         </ul>
       </nav>
       <Routes>
@@ -65,6 +69,7 @@ function App() {
         <Route path="/learn-component" element={<LearnComponent />} />
         <Route path="/learn-context" element={<MyWeather />} />
         <Route path="/learn-reducer" element={<LearnReducer />} />
+        <Route path="learn-tailwind" element={<LearnTailWind />} />
       </Routes>
     </main>
   );
