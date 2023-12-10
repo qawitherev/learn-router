@@ -24,7 +24,7 @@ export function LearnTailWind() {
     <>
       <h1>Using Grid</h1>
       <div className="bg-gray-100">
-        <div className="grid auto-rows sm:grid-cols-1 md:grid-cols-6 gap-3 p-5">
+        <div className="grid auto-rows-[200px] sm:grid-cols-1 md:grid-cols-6 gap-3 p-5">
           {[...Array(7)].map((_, i) => (
             <div
               key={i}
@@ -143,46 +143,36 @@ function ProjectNumberSubBento() {
 function MobileStackSubBento() {
   return (
     <>
-      <div className="flex flex-col items-center justify-center p-10 h-full gap-1 ">
+      <div className="flex flex-col items-center justify-center p-10 h-full w-full gap-4">
         <h1>Mobile Development</h1>
-        <div className="flex justify-between gap-1">
-          <div>
-            <img
-              className=" aspect-square rounded-lg"
-              alt="kotlin-logo"
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Kotlin_Icon.png/1200px-Kotlin_Icon.png"
-            />
-          </div>
-          <div>
-            <img
-              className=" aspect-square rounded-lg"
-              alt="kotlin-logo"
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Kotlin_Icon.png/1200px-Kotlin_Icon.png"
-            />
-          </div>
-          <div>
-            <img
-              className=" aspect-square rounded-lg"
-              alt="kotlin-logo"
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Kotlin_Icon.png/1200px-Kotlin_Icon.png"
-            />
-          </div>
+        <div className=" flex justify-around w-3/4 gap-1">
+          <img
+            className=" h-14 rounded-lg"
+            alt="kotlin-logo"
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Kotlin_Icon.png/1200px-Kotlin_Icon.png"
+          />
+          <img
+            className=" h-14 w-14 rounded-lg"
+            alt="swift-logo"
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUHbR_02Y1hb45WaOafcClJ7yx2m-yYjxwtdMXDau9qw&s"
+          />
+          <img
+            className=" h-14 w-14 rounded-lg"
+            alt="flutter-logo"
+            src="https://pbs.twimg.com/profile_images/1187814172307800064/MhnwJbxw_400x400.jpg"
+          />
         </div>
-        <div className=" flex justify-between gap-1" >
-        <div>
-            <img
-              className=" aspect-square rounded-lg"
-              alt="kotlin-logo"
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Kotlin_Icon.png/1200px-Kotlin_Icon.png"
-            />
-          </div>
-          <div>
-            <img
-              className=" aspect-square rounded-lg"
-              alt="kotlin-logo"
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Kotlin_Icon.png/1200px-Kotlin_Icon.png"
-            />
-          </div>
+        <div className="flex justify-evenly w-3/4 gap-1">
+          <img
+            className=" h-14 rounded-lg"
+            alt="java-logo"
+            src="https://www.shareicon.net/data/512x512/2016/09/23/833700_windows_512x512.png"
+          />
+          <img
+            className=" h-14 rounded-lg"
+            alt="dart-logo"
+            src="https://upload.wikimedia.org/wikipedia/commons/c/c6/Dart_logo.png"
+          />
         </div>
       </div>
     </>
