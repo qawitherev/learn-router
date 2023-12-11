@@ -141,40 +141,64 @@ function ProjectNumberSubBento() {
   );
 }
 
+const getMobileStack = (index) => {
+  switch (index) {
+    case 0:
+      return {
+        name: "Kotlin",
+        alt: "kotlin-logo",
+        src: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Kotlin_Icon.png/1200px-Kotlin_Icon.png",
+        description:
+          "Kotlin is a statically-typed programming language that runs on the Java Virtual Machine (JVM) and can also be compiled to JavaScript or native code. Developed by JetBrains, Kotlin aims to be concise, expressive, and interoperable with existing Java code.",
+      };
+    case 1:
+      return {
+        name: "Swift",
+        alt: "swift-logo",
+        src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUHbR_02Y1hb45WaOafcClJ7yx2m-yYjxwtdMXDau9qw&s",
+        description:
+          "Swift is a programming language developed by Apple for iOS, macOS, watchOS, tvOS, and other Apple platforms. It was introduced in 2014 as a replacement for Objective-C and is designed to be modern, safe, and developer-friendly.",
+      };
+    case 2:
+      return {
+        name: "Flutter",
+        alt: "flutter-logo",
+        src: "https://pbs.twimg.com/profile_images/1187814172307800064/MhnwJbxw_400x400.jpg",
+        description:
+          "Flutter is an open-source UI software development toolkit created by Google. It is used to build natively compiled applications for mobile, web, and desktop from a single codebase.",
+      };
+    case 3:
+      return {
+        name: "Java",
+        alt: "java-logo",
+        src: "https://www.shareicon.net/data/512x512/2016/09/23/833700_windows_512x512.png",
+        description:
+          "Java is a versatile, object-oriented, and platform-independent programming language originally developed by Sun Microsystems and now owned by Oracle Corporation.",
+      };
+    case 4:
+      return {
+        name: "Dart",
+        alt: "dart-logo",
+        src: "https://upload.wikimedia.org/wikipedia/commons/c/c6/Dart_logo.png",
+        description:
+          "Dart is a programming language developed by Google. It is known for its simplicity, speed, and versatility. Dart is often associated with the Flutter framework, where it serves as the primary language for building user interfaces across various platforms.",
+      };
+    default:
+      return null;
+  }
+};
+
 //todo: refactor this
 function MobileStackSubBento() {
   return (
     <>
-      <div className="flex flex-col items-center justify-center p-3 h-full w-full gap-4">
+      <div className="flex flex-col items-center justify-center p-5 h-full">
         <h1>Mobile Development</h1>
-        <div className=" flex justify-around w-3/4 gap-1">
-          <img
-            className=" h-16 rounded-lg"
-            alt="kotlin-logo"
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Kotlin_Icon.png/1200px-Kotlin_Icon.png"
-          />
-          <img
-            className=" h-16 w-16 rounded-lg"
-            alt="swift-logo"
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUHbR_02Y1hb45WaOafcClJ7yx2m-yYjxwtdMXDau9qw&s"
-          />
-          <img
-            className=" h-16 w-16 rounded-lg"
-            alt="flutter-logo"
-            src="https://pbs.twimg.com/profile_images/1187814172307800064/MhnwJbxw_400x400.jpg"
-          />
-        </div>
-        <div className="flex justify-evenly w-3/4 gap-1">
-          <img
-            className=" h-16 rounded-lg"
-            alt="java-logo"
-            src="https://www.shareicon.net/data/512x512/2016/09/23/833700_windows_512x512.png"
-          />
-          <img
-            className=" h-16 rounded-lg"
-            alt="dart-logo"
-            src="https://upload.wikimedia.org/wikipedia/commons/c/c6/Dart_logo.png"
-          />
+        <div className=" py-3" />
+        <div className="grid max-sm:grid-cols-3 max-md:grid-cols-3 md:grid-rows-3 md:grid-cols-2 gap-4 overflow-hidden">
+          {[...Array(5)].map((_, i) => (
+            <img key={i} className=" h-12 w-12 rounded-lg" alt={getMobileStack(i).alt} src={getMobileStack(i).src} />
+          ))}
         </div>
       </div>
     </>
@@ -222,14 +246,42 @@ function SocialSiteSubBento() {
     }
   };
 
+  const handleOnClick = (index) => {
+    switch (index) {
+      case 0:
+        window.open(
+          "https://www.linkedin.com/in/abdul-qawi-bin-kamran-912a411a2/",
+          "blank"
+        );
+        break;
+      case 1:
+        window.open("https://github.com/qawitherev", "blank");
+        break;
+      case 2:
+        window.open("mailto:qawitherev@gmail.com", "blank");
+        break;
+      case 3:
+        window.open("tel:0168284082", "blank");
+        break;
+      default:
+        break;
+    }
+  };
+
   return (
     <>
       <div className="flex flex-col items-center justify-center h-full p-7">
         <h1 className=" text-center">Lets get in touch!</h1>
         <div className="py-3" />
-        <div className="flex max-sm:w-full md:h-full md:flex-col md:flex-grow justify-around">
+        <div className="flex max-sm:w-full max-md:w-full md:h-full md:flex-col md:flex-grow justify-around">
           {[...Array(4)].map((_, i) => (
-            <img onClick={() => window.open('https://www.google.com', 'blank')} className=" cursor-pointer transition hover:scale-105 rounded-lg h-12 w-12" alt={getSocialSite(i).alt} src={getSocialSite(i).src} />
+            <img
+            key={i}
+              onClick={() => handleOnClick(i)}
+              className=" cursor-pointer transition hover:scale-105 rounded-lg h-12 w-12"
+              alt={getSocialSite(i).alt}
+              src={getSocialSite(i).src}
+            />
           ))}
         </div>
       </div>
@@ -247,36 +299,66 @@ function CatchPhraseSubBento() {
   );
 }
 
+const getWebInfo = (index) => {
+  switch (index) {
+    case 0:
+      return {
+        name: "React",
+        alt: "react-logo",
+        src: "https://cdn.iconscout.com/icon/free/png-256/free-react-1-282599.png?f=webp",
+        description:
+          "React.js, commonly referred to as React, is an open-source JavaScript library for building user interfaces. Developed and maintained by Facebook, React is widely used for creating interactive and dynamic user interfaces in web application.",
+      };
+    case 1:
+      return {
+        name: "TailWind",
+        alt: "tailwind-logo",
+        src: "https://play.tailwindcss.com/social-square.jpg",
+        description:
+          "Tailwind CSS is a utility-first CSS framework that provides a set of low-level utility classes to build designs directly in your markup. Unlike traditional CSS frameworks that come with predefined components and styles, Tailwind encourages a more flexible and customizable approach.",
+      };
+    case 2:
+      return {
+        name: "NodeJS",
+        alt: "nodejs-logo",
+        src: "https://cdn-icons-png.flaticon.com/512/5968/5968322.png",
+        description:
+          "Node.js is an open-source, cross-platform JavaScript runtime environment that executes JavaScript code outside of a web browser. It allows developers to use JavaScript for server-side and networking applications, enabling the development of scalable and high-performance applications.",
+      };
+    case 3:
+      return {
+        name: "TypeScript",
+        alt: "typescript-logo",
+        src: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Typescript_logo_2020.svg/1024px-Typescript_logo_2020.svg.png",
+        description:
+          "TypeScript is a statically typed superset of JavaScript that adds optional static typing and other features to the language. It is developed and maintained by Microsoft.",
+      };
+    default:
+      return {
+        name: "React",
+        alt: "react-logo",
+        src: "http",
+        description: "",
+      };
+  }
+};
+
 function WebStackSubBento() {
   return (
     <>
-      <div className="flex flex-col items-center justify-center h-full gap-4 p-5">
+      <div className="flex flex-col items-center justify-center h-full p-5">
         <h1>Web stack is...</h1>
-        <div className=" flex justify-center w-3/4 gap-1">
-          <img
-            className=" h-16 rounded-lg"
-            alt="react-logo"
-            src="https://cdn.iconscout.com/icon/free/png-256/free-react-1-282599.png?f=webp"
-          />
-          <div className=" px-5" />
-          <img
-            className=" h-16 rounded-lg"
-            alt="tailwind-logo"
-            src="https://play.tailwindcss.com/social-square.jpg"
-          />
-        </div>
-        <div className="flex justify-center w-3/4 gap-1">
-          <img
-            className=" h-16 rounded-lg"
-            alt="nodejs-logo"
-            src="https://cdn-icons-png.flaticon.com/512/5968/5968322.png"
-          />
-          <div className=" px-5" />
-          <img
-            className=" h-16 rounded-lg"
-            alt="js-logo"
-            src="https://cdn-icons-png.flaticon.com/512/5968/5968292.png"
-          />
+        <div className=" py-3" />
+        <div className="grid grid-cols-2 grid-rows-2 gap-4 ">
+          {[...Array(4)].map((_, i) => (
+            <div key={i}>
+              <img
+                className=" rounded-lg h-12 w-12"
+                alt={getWebInfo(i).alt}
+                src={getWebInfo(i).src}
+              />
+            </div>
+          ))}
         </div>
       </div>
     </>
@@ -393,7 +475,7 @@ function MobileStack() {
         return {
           name: "Java",
           description:
-            "Java is a versatile, object-oriented, and platform-independent programming language originally developed by Sun Microsystems and now owned by Oracle Corporation. ",
+            "Java is a versatile, object-oriented, and platform-independent programming language originally developed by Sun Microsystems and now owned by Oracle Corporation.",
           alt: "java-logo",
           src: "https://www.shareicon.net/data/512x512/2016/09/23/833700_windows_512x512.png",
         };
@@ -521,13 +603,13 @@ function WebStack() {
         <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-3">
           {[...Array(4)].map((_, i) => (
             <div key={i} className="flex flex-col bg-white rounded-xl p-5">
-              <h1 className="font-bold">{stackInfo(i).name}</h1>
+              <h1 className="font-bold">{getWebInfo(i).name}</h1>
               <div className="py-1" />
               <div className=" flex justify-center">
                 <img
                   className=" rounded-lg h-10 w-10"
-                  alt={stackInfo(i).alt}
-                  src={stackInfo(i).src}
+                  alt={getWebInfo(i).alt}
+                  src={getWebInfo(i).src}
                 />
                 <div className=" px-2" />
                 <h1 className=" flex-grow text-justify">
