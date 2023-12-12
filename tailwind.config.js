@@ -8,6 +8,9 @@ module.exports = {
       colors: {
         'adt-green': '#2f7f59',
       },
+      fontFamily: {
+        sans: ['Roboto Mono', 'monospace']
+      }
     },
   },
   plugins: [],

@@ -443,7 +443,7 @@ function CatchPhraseSubBento() {
         />
         <div className="absolute flex flex-col items-center justify-center w-full h-full p-3 z-10">
           <h1 className="text-white">Hi, I am Abdul Qawi</h1>
-          <h1 className=" text-3xl font-bold text-white">A Multi-Tech</h1>
+          <h1 className="text-3xl font-bold text-white">A Multi-Tech</h1>
           <h1 className="text-3xl font-bold text-white"> Stack Master</h1>
         </div>
       </div>
