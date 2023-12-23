@@ -1,4 +1,10 @@
-import React, { useRef } from "react";
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 
 const getMobileStack = (index) => {
   switch (index) {
@@ -8,7 +14,7 @@ const getMobileStack = (index) => {
         alt: "kotlin-logo",
         src: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Kotlin_Icon.png/1200px-Kotlin_Icon.png",
         description:
-          "Kotlin is a statically-typed programming language that runs on the Java Virtual Machine (JVM) and can also be compiled to JavaScript or native code. Developed by JetBrains, Kotlin aims to be concise, expressive, and interoperable with existing Java code.",
+          "Kotlin is a statically-typed programming language that runs on the Java Virtual Machine (JVM) and can also be compiled to JavaScript or native code.",
       };
     case 1:
       return {
@@ -40,7 +46,7 @@ const getMobileStack = (index) => {
         alt: "dart-logo",
         src: "https://upload.wikimedia.org/wikipedia/commons/c/c6/Dart_logo.png",
         description:
-          "Dart is a programming language developed by Google. It is known for its simplicity, speed, and versatility. Dart is often associated with the Flutter framework, where it serves as the primary language for building user interfaces across various platforms.",
+          "Dart is a programming language developed by Google. It is known for its simplicity, speed, and versatility. Dart is often associated with the Flutter framework.",
       };
     default:
       return null;
@@ -71,7 +77,7 @@ const getWebInfo = (index) => {
         alt: "nodejs-logo",
         src: "https://cdn-icons-png.flaticon.com/512/5968/5968322.png",
         description:
-          "Node.js is an open-source, cross-platform JavaScript runtime environment that executes JavaScript code outside of a web browser. It allows developers to use JavaScript for server-side and networking applications, enabling the development of scalable and high-performance applications.",
+          "Node.js is an open-source, cross-platform JavaScript runtime environment that executes JavaScript code outside of a web browser. It allows developers to use JavaScript for server-side and networking application.",
       };
     case 3:
       return {
@@ -110,7 +116,7 @@ const companyList = [
   },
 ];
 
-const getProject = [
+const projectList = [
   {
     name: "project1",
     description: "project description",
@@ -137,7 +143,7 @@ const getProject = [
   },
 ];
 
-const miscList = [
+const outsideSkillList = [
   {
     name: "Azure DevOps",
     description: "Lorem ipsum Azure DevOps",
@@ -224,6 +230,54 @@ const getSocialSite = (index) => {
 
 //todo: rearrange when max-sm
 
+const windowSizeContext = createContext();
+
+const WindowSizeProvider = ({ children }) => {
+  const [windowSize, setWindowSize] = useState("");
+
+  const handleResize = () => {
+    const width = window.innerWidth;
+
+    if (width > 1536) {
+      setWindowSize("2xl");
+      console.log("2xl");
+    } else if (width > 1280) {
+      setWindowSize("xl");
+      console.log("xl");
+    } else if (width > 1024) {
+      setWindowSize("lg");
+      console.log("lg");
+    } else if (width > 768) {
+      setWindowSize("md");
+      console.log("md");
+    } else if (width > 640) {
+      setWindowSize("sm");
+      console.log("sm");
+    } else {
+      setWindowSize("max-sm");
+      console.log("max-sm");
+    }
+  };
+
+  useEffect(() => {
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  return (
+    <>
+      <windowSizeContext.Provider value={{ windowSize }}>
+        {children}
+      </windowSizeContext.Provider>
+      ;
+    </>
+  );
+};
+
 export function LearnTailWind() {
   const componentRefs = [
     useRef(null),
@@ -264,7 +318,9 @@ export function LearnTailWind() {
           transform transition-transform hover:scale-95
           `}
             >
-              <SubBento data={i} />
+              <WindowSizeProvider>
+                <SubBento data={i} />
+              </WindowSizeProvider>
             </div>
           ))}
         </div>
@@ -295,53 +351,116 @@ export function LearnTailWind() {
   );
 }
 
+function AnotherSubBento() {
+  const { windowSize } = useContext(windowSizeContext);
+
+  useEffect(() => {
+    console.log("AnotherSubBento rendered");
+  }, []);
+  return (
+    <>
+      <h1>Window size: {windowSize}</h1>
+    </>
+  );
+}
+
 function SubBento(props) {
   const data = props.data;
-  switch (data) {
-    case 0:
-      return (
-        <>
-          <CompanyWorkSubBento />
-        </>
-      );
-    case 1:
-      return (
-        <>
-          <ProjectNumberSubBento />
-        </>
-      );
-    case 2:
-      return (
-        <>
-          <MobileStackSubBento />
-        </>
-      );
-    case 3:
-      return (
-        <>
-          <SocialSiteSubBento />
-        </>
-      );
-    case 4:
-      return (
-        <>
-          <CatchPhraseSubBento />
-        </>
-      );
-    case 5:
-      return (
-        <>
-          <WebStackSubBento />
-        </>
-      );
-    case 6:
-      return (
-        <>
-          <OutsideSkillSubBento />
-        </>
-      );
-    default:
-      return null;
+  const { windowSize } = useContext(windowSizeContext);
+  if (windowSize === "max-sm") {
+    switch (data) {
+      case 0:
+        return (
+          <>
+            <CatchPhraseSubBento />
+          </>
+        );
+      case 1:
+        return (
+          <>
+            <MobileStackSubBento />
+          </>
+        );
+      case 2:
+        return (
+          <>
+            <WebStackSubBento />
+          </>
+        );
+      case 3:
+        return (
+          <>
+            <CompanyWorkSubBento />
+          </>
+        );
+      case 4:
+        return (
+          <>
+            <ProjectNumberSubBento />
+          </>
+        );
+      case 5:
+        return (
+          <>
+            <OutsideSkillSubBento />
+          </>
+        );
+      case 6:
+        return (
+          <>
+            <SocialSiteSubBento />
+          </>
+        );
+      default:
+        return null;
+    }
+  } else {
+    switch (data) {
+      case 0:
+        return (
+          <>
+            <CompanyWorkSubBento />
+          </>
+        );
+      case 1:
+        return (
+          <>
+            <ProjectNumberSubBento />
+          </>
+        );
+      case 2:
+        return (
+          <>
+            <MobileStackSubBento />
+          </>
+        );
+      case 3:
+        return (
+          <>
+            <SocialSiteSubBento />
+          </>
+        );
+      case 4:
+        return (
+          <>
+            <CatchPhraseSubBento />
+          </>
+        );
+      case 5:
+        return (
+          <>
+            <WebStackSubBento />
+          </>
+        );
+      case 6:
+        return (
+          <>
+            <OutsideSkillSubBento />
+          </>
+        );
+      default:
+        return null;
+    }
   }
 }
 
@@ -360,7 +479,7 @@ function ProjectNumberSubBento() {
   return (
     <>
       <div className="flex flex-col items-center justify-center h-full">
-        <h1>{getProject.length}</h1>
+        <h1>{projectList.length}</h1>
         <h1>Projects done</h1>
       </div>
     </>
@@ -413,7 +532,7 @@ function SocialSiteSubBento() {
 
   return (
     <>
-      <div className="flex flex-col items-center justify-center h-full p-7">
+      <div className=" absolute flex flex-col items-center justify-center h-full w-full p-7 z-10">
         <h1 className=" text-center">Lets get in touch!</h1>
         <div className="py-3" />
         <div className="flex max-sm:w-full max-md:w-full md:h-full md:flex-col md:flex-grow justify-around">
@@ -436,13 +555,15 @@ function CatchPhraseSubBento() {
   return (
     <>
       <div className="relative h-full">
+        {/* todo fix the background not filling when in <md */}
         <img
-          className="absolute inset-0 bg-cover bg-center"
+          className="absolute object-center"
           alt="catchphrase-bg"
           src="https://wallpapers.com/images/hd/minimalist-best-laptop-for-coding-glt27d3cmfygaipy.jpg"
         />
         <div className="absolute flex flex-col items-center justify-center w-full h-full p-3 z-10">
-          <h1 className="text-white">Hi, I am Abdul Qawi</h1>
+          <h1 className="text-white">Hi, I am Abdul Qawi</h1>{" "}
+          {/*todo: set the text into white  */}
           <h1 className="text-3xl font-bold text-white">A Multi-Tech</h1>
           <h1 className="text-3xl font-bold text-white"> Stack Master</h1>
         </div>
@@ -479,13 +600,13 @@ function OutsideSkillSubBento() {
       <div className="flex flex-col items-center justify-center h-full p-5">
         <h1>I am also good with ...</h1>
         <div className="py-2"></div>
-        <div className="flex justify-around md:w-3/4">
+        <div className="flex justify-around max-sm:w-full sm:w-full md:w-3/4">
           {[...Array(6)].map((_, i) => (
             <img
               key={i}
               className="h-12 w-12 rounded-lg"
-              alt={miscList[i].imgAlt}
-              src={miscList[i].imgSrc}
+              alt={outsideSkillList[i].imgAlt}
+              src={outsideSkillList[i].imgSrc}
             />
           ))}
         </div>
@@ -497,11 +618,10 @@ function OutsideSkillSubBento() {
 function CompanyWork() {
   return (
     <>
-      <div>
-        <h1 className="text-adt-green px-7 pb-3 text-3xl font-sans">
+      <div className="mb-10">
+        <h1 className="text-adt-green px-7 text-3xl mb-2">
           Companies I proudly serve for
         </h1>
-        <div className=" py-2" />
         <div className="grid auto-rows-min-[150px] sm:grid-cols-1 md:grid-cols-2 gap-3 px-5">
           {[...Array(2)].map((_, i) => (
             <div
@@ -527,7 +647,21 @@ function CompanyWork() {
 function ProjectNumber() {
   return (
     <>
-      <h1>Project number is: ...</h1>
+      <div className="flex flex-col justify-start px-5 mb-10">
+        <h1 className=" mb-2 px-2 text-3xl">Projects Done</h1>
+        <div className="grid max-sm:grid-cols-1 md:grid-cols-2 gap-4">
+          {[...Array(projectList.length)].map((_, i) => (
+            <div
+              key={i}
+              className="bg-white p-5 rounded-lg flex flex-col justify-center"
+            >
+              <h1 className="mb-2">{projectList[i].name}</h1>
+              <h1>{projectList[i].description}</h1>
+              <h1>{projectList[i].company}</h1>
+            </div>
+          ))}
+        </div>
+      </div>
     </>
   );
 }
@@ -535,14 +669,14 @@ function ProjectNumber() {
 function MobileStack() {
   return (
     <>
-      <div className="flex flex-col justify-start px-5">
+      <div className="flex flex-col justify-start px-5 mb-10">
         <h1
           className=" px-2
-                text-3xl font-sans text-orange-500"
+                text-3xl font-sans text-orange-500 mb-2"
         >
           I am quite "mobile" with these technologies
         </h1>
-        <div className="py-2" />
+
         <div className=" grid sm:grid-cols-1 md:grid-cols-2 gap-3">
           {[...Array(5)].map((_, i) => (
             <div key={i} className=" flex flex-col bg-white rounded-xl p-5">
@@ -572,11 +706,7 @@ function SocialSite() {
 }
 
 function CatchPhrase() {
-  return (
-    <>
-      <h1>Catchphrase is: ...</h1>
-    </>
-  );
+  return null;
 }
 
 function WebStack() {
@@ -626,11 +756,10 @@ function WebStack() {
 
   return (
     <>
-      <div className=" flex flex-col justify-start px-5">
-        <h1 className="px-7 text-3xl font-sans text-amber-500">
+      <div className=" flex flex-col justify-start px-5 mb-10">
+        <h1 className="px-2 text-3xl font-sans text-amber-500 mb-2">
           I develop websites with these
         </h1>
-        <div className="py-2" />
         <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-3">
           {[...Array(4)].map((_, i) => (
             <div key={i} className="flex flex-col bg-white rounded-xl p-5">
@@ -644,7 +773,7 @@ function WebStack() {
                 />
                 <div className=" px-2" />
                 <h1 className=" flex-grow text-justify">
-                  {stackInfo(i).description}
+                  {getWebInfo(i).description}
                 </h1>
               </div>
             </div>
